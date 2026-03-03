@@ -131,9 +131,3 @@ vercel
 - MCP Server Telegram
 - MCP Server Discord
 - ChatMCP Official Twitter
-
-## About the author
-
-- idoubi
-- Twitter: idoubicv
-- Buy me a coffee
