@@ -125,9 +125,3 @@ vercel
 | `/api/submit-projects` | POST | Submit multiple projects |
 | `/api/summarize-project` | POST | Trigger AI summarization for a project (body: `{ "name": "project-name" }`) |
 | `/api/summarize-projects` | POST | Batch summarization |
-
-## Community
-
-- MCP Server Telegram
-- MCP Server Discord
-- ChatMCP Official Twitter
