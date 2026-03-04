@@ -4,68 +4,47 @@ export function genUuid(): string {
   return uuidv4();
 }
 
-export function genUniSeq(prefix: string = ""): string {
+export function genUniSeq(prefix = ""): string {
   const timestamp = Date.now().toString(36);
   const randomPart = Math.random().toString(36).substring(2, 8);
-
   return `${prefix}${randomPart}${timestamp}`;
 }
 
-export function getIsoTimestr(): string {
-  return new Date().toISOString();
-}
-
 export function removeYamlMarkers(text: string): string {
-  const cleanedText = text.replace(/^```yaml\s*|\s*```$/g, "");
-  return cleanedText;
+  return text.replace(/^```yaml\s*|\s*```$/g, "");
 }
 
-export function parseEventData(data: string) {
+export function parseEventData(data: string): unknown {
   const lines = data.split("\n");
   const dataLine = lines.find((line) => line.startsWith("data:"));
-
   if (!dataLine) {
     throw new Error("invalid event data: " + data);
   }
-
-  const jsonData = dataLine.replace("data: ", "");
-  try {
-    const dataObj = JSON.parse(jsonData);
-
-    return dataObj;
-  } catch (e) {
-    throw e;
-  }
+  const jsonStr = dataLine.replace("data: ", "");
+  return JSON.parse(jsonStr);
 }
 
-export const isSmScreen = () => {
-  const isNarrowScreen = window.innerWidth < 768;
-
-  return isNarrowScreen;
-};
+export function isSmScreen(): boolean {
+  if (typeof window === "undefined") return false;
+  return window.innerWidth < 768;
+}
 
 export function genNonceStr(length: number): string {
   const characters =
     "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
   let result = "";
-  const charactersLength = characters.length;
-
   for (let i = 0; i < length; i++) {
-    const randomIndex = Math.floor(Math.random() * charactersLength);
-    result += characters[randomIndex];
+    result += characters[Math.floor(Math.random() * characters.length)];
   }
-
   return result;
 }
 
 export function bytesToKB(bytes: number): string {
-  const kb = bytes / 1024;
-  return kb.toFixed(1);
+  return (bytes / 1024).toFixed(1);
 }
 
 export function bytesToMB(bytes: number): string {
-  const MB = bytes / 1024 / 1024;
-  return MB.toFixed(1);
+  return (bytes / 1024 / 1024).toFixed(1);
 }
 
 export function upperFirstChar(str: string): string {
@@ -74,13 +53,12 @@ export function upperFirstChar(str: string): string {
 }
 
 export function removeUrlSearchParams(originalUrl: string): string {
-  if (!originalUrl) {
-    return "";
+  if (!originalUrl) return "";
+  try {
+    const url = new URL(originalUrl);
+    url.search = "";
+    return url.toString();
+  } catch {
+    return originalUrl;
   }
-
-  const url = new URL(originalUrl);
-
-  url.search = "";
-
-  return url.toString();
 }

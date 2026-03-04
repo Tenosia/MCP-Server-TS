@@ -2,23 +2,18 @@ export function getIsoTimestr(): string {
   return new Date().toISOString();
 }
 
-export const getTimestamp = () => {
-  let time = Date.parse(new Date().toUTCString());
+export function getTimestamp(): number {
+  return Math.floor(Date.now() / 1000);
+}
 
-  return time / 1000;
-};
+export function getMillisecond(): number {
+  return Date.now();
+}
 
-export const getMillisecond = () => {
-  let time = new Date().getTime();
-
-  return time;
-};
-
-export const sleep = (ms: number) => {
+export function sleep(ms: number): Promise<void> {
   return new Promise((resolve) => setTimeout(resolve, ms));
-};
+}
 
-export const msToSeconds = (ms: number): string => {
-  const seconds = ms / 1000;
-  return seconds.toFixed(2);
-};
+export function msToSeconds(ms: number): string {
+  return (ms / 1000).toFixed(2);
+}

@@ -1,24 +1,29 @@
-export function respData(data: any) {
-  return respJson(0, "ok", data || []);
+const SUCCESS_CODE = 0;
+const ERROR_CODE = -1;
+
+export function respData<T>(data: T): Response {
+  return respJson(SUCCESS_CODE, "ok", data);
 }
 
-export function respOk() {
-  return respJson(0, "ok");
+export function respOk(): Response {
+  return respJson(SUCCESS_CODE, "ok");
 }
 
-export function respErr(message: string) {
-  return respJson(-1, message);
+export function respErr(message: string): Response {
+  return respJson(ERROR_CODE, message);
 }
 
-export function respJson(code: number, message: string, data?: any) {
-  let json = {
-    code: code,
-    message: message,
-    data: data,
+export function respJson(
+  code: number,
+  message: string,
+  data?: unknown
+): Response {
+  const payload: { code: number; message: string; data?: unknown } = {
+    code,
+    message,
   };
-  if (data) {
-    json["data"] = data;
+  if (data !== undefined && data !== null) {
+    payload.data = data;
   }
-
-  return Response.json(json);
+  return Response.json(payload);
 }
