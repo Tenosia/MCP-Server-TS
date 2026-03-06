@@ -1,14 +1,17 @@
-import { Category } from "@/types/category";
 import { FiHome } from "react-icons/fi";
 import { MdKeyboardArrowRight } from "react-icons/md";
-import { Project } from "@/types/project";
-export default ({
-  category,
-  project,
-}: {
+import type { Category } from "@/types/category";
+import type { Project } from "@/types/project";
+
+interface ProjectCrumbProps {
   category?: Category;
   project: Project;
-}) => {
+}
+
+export default function ProjectCrumb({
+  category,
+  project,
+}: ProjectCrumbProps) {
   return (
     <nav className="flex" aria-label="Breadcrumb">
       <ol role="list" className="flex items-center space-x-2">
@@ -55,7 +58,7 @@ export default ({
               aria-current="page"
               // href={renameShortUrl(gpts.short_url, gpts.uuid)}
             >
-              {project.name}
+              {project.name ?? project.title}
             </a>
           </div>
         </li>

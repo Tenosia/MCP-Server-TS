@@ -1,7 +1,7 @@
 import { FiHome } from "react-icons/fi";
 import { MdKeyboardArrowRight } from "react-icons/md";
 
-export default () => {
+export default function CategoriesCrumb() {
   return (
     <nav className="flex" aria-label="Breadcrumb">
       <ol role="list" className="flex items-center space-x-2">
@@ -20,6 +20,7 @@ export default () => {
             <a
               className="ml-2 text-md font-medium text-primary"
               aria-current="page"
+              href="/categories"
             >
               Categories
             </a>
@@ -28,4 +29,4 @@ export default () => {
       </ol>
     </nav>
   );
-};
+}

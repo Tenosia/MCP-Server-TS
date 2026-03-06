@@ -1,18 +1,19 @@
 "use client";
 
 import {
-  ChangeEvent,
+  type ChangeEvent,
+  type KeyboardEvent,
   useEffect,
   useRef,
   useState,
 } from "react";
 import { useRouter } from "next/navigation";
 
-interface Props {
+interface SearchProps {
   query?: string;
 }
 
-export default ({ query }: Props) => {
+export default function Search({ query }: SearchProps) {
   const router = useRouter();
   const [inputDisabled, setInputDisabled] = useState(false);
   const inputRef = useRef<HTMLInputElement | null>(null);
@@ -23,22 +24,18 @@ export default ({ query }: Props) => {
   };
 
   const handleInputKeydown = (e: KeyboardEvent<HTMLInputElement>) => {
-    if (e.code === "Enter" && !e.shiftKey) {
-      if (e.keyCode !== 229) {
-        e.preventDefault();
-        handleSubmit("", content);
-      }
+    if (e.code === "Enter" && !e.shiftKey && e.keyCode !== 229) {
+      e.preventDefault();
+      handleSubmit("", content);
     }
   };
 
-  const handleSubmit = async (keyword: string, question: string) => {
+  const handleSubmit = async (_keyword: string, question: string) => {
     try {
       const url = `?q=${encodeURIComponent(question)}`;
-      console.log("query url", url);
       await router.push(url);
-      setInputDisabled(true); // Disable input after navigation
-    } catch (e) {
-      console.log("search failed: ", e);
+      setInputDisabled(true);
+    } catch {
       setInputDisabled(false);
     }
   };

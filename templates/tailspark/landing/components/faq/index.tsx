@@ -1,16 +1,21 @@
 "use client";
 
 import { AnimatePresence, motion } from "framer-motion";
-
-import { Section } from "@/types/landing";
 import { useState } from "react";
+import type { Section } from "@/types/landing";
 
-export default function ({ section }: { section: Section }) {
+interface FaqProps {
+  section: Section;
+}
+
+export default function Faq({ section }: FaqProps) {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
 
   const toggleFAQ = (index: number) => {
     setActiveIndex(activeIndex === index ? null : index);
   };
+
+  const items = section?.items ?? [];
 
   return (
     <div className="w-full max-w-4xl mx-auto px-4 py-8">
@@ -18,9 +23,9 @@ export default function ({ section }: { section: Section }) {
       <p className="text-center text-2xl mb-8">{section.description}</p>
 
       <div className="space-y-4">
-        {section?.items?.map((faq, index) => (
+        {items.map((faq, index) => (
           <div
-            key={index}
+            key={faq.title ?? index}
             className="border border-[#7e7e7e] rounded-lg overflow-hidden"
           >
             <button

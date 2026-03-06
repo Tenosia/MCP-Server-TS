@@ -2,15 +2,17 @@ import "./assets/style.css";
 
 import Footer from "./components/footer";
 import Header from "./components/header";
-import { Page } from "@/types/landing";
+import type { Page } from "@/types/landing";
 
-export default function ({
-  children,
-  page,
-}: Readonly<{
+interface LandingLayoutProps {
   children: React.ReactNode;
   page: Page;
-}>) {
+}
+
+export default function LandingLayout({
+  children,
+  page,
+}: Readonly<LandingLayoutProps>) {
   return (
     <main>
       {page.header && <Header header={page.header} />}

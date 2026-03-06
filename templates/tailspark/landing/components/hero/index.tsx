@@ -1,10 +1,15 @@
 import BgStar from "../../assets/imgs/bgstar.svg";
 import Buttons from "./buttons";
-import { Hero } from "@/types/landing";
+import type { Hero } from "@/types/landing";
 
-export default ({ hero, count }: { hero: Hero; count?: number }) => {
+interface HeroProps {
+  hero: Hero;
+  count?: number;
+}
+
+export default function HeroSection({ hero, count }: HeroProps) {
   return (
-    <section className="relatve">
+    <section className="relative">
       <div className="mx-auto w-full max-w-7xl px-4 mt-12 md:mt-24">
         <div className="mx-auto w-full max-w-4xl text-center">
           <h1 className="text-primary leading-tight text-5xl font-bold md:text-6xl">

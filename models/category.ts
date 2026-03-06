@@ -41,8 +41,11 @@ export async function getCategories(
 
   if (error) return [];
 
-  return data.map((category) => ({
-    ...category,
-    projects_count: getProjectsCountByCategory(category.name),
-  }));
+  const categoriesWithCount = await Promise.all(
+    data.map(async (category) => {
+      const count = await getProjectsCountByCategory(category.name);
+      return { ...category, projects_count: count };
+    })
+  );
+  return categoriesWithCount;
 }
