@@ -1,11 +1,11 @@
-import { ReactNode } from "react";
+import type { ReactNode } from "react";
 
-export interface Nav {
+export interface NavItem {
   title: string;
   name?: string;
   url?: string;
   target?: string;
   active?: boolean;
   icon?: ReactNode;
-  children?: Nav[];
+  children?: NavItem[];
 }

@@ -1,16 +1,18 @@
-import { Category } from "@/types/category";
-import Crumb from "./crumb";
 import Link from "next/link";
-import { Project } from "@/types/project";
+import type { Category } from "@/types/category";
+import type { Project } from "@/types/project";
+import Crumb from "./crumb";
 import Projects from "../projects";
 
-export default function ({
-  categories,
-  projects,
-}: {
+interface CategoriesPageProps {
   categories: Category[];
   projects: Project[];
-}) {
+}
+
+export default function CategoriesPage({
+  categories,
+  projects,
+}: CategoriesPageProps) {
   return (
     <div className="mx-auto max-w-7xl px-5 py-4 md:px-10 md:py-4 lg:py-4">
       <Crumb />
@@ -25,9 +27,7 @@ export default function ({
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mt-8">
-        {categories &&
-          categories.map((category: Category) => {
-            return (
+        {categories.map((category) => (
               <Link
                 key={category.name}
                 href={`/category/${category.name}`}
@@ -36,12 +36,11 @@ export default function ({
                 <div className="flex justify-between items-center">
                   <span className="text-lg">{category.title}</span>
                   <span className="text-primary">
-                    {category.projects_count}
+                    {category.projects_count ?? 0}
                   </span>
                 </div>
               </Link>
-            );
-          })}
+            ))}
       </div>
 
       <div className="w-full text-center">

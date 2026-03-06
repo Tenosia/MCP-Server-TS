@@ -1,12 +1,15 @@
 "use client";
 
-import { BsGithub, BsTwitter } from "react-icons/bs";
 import { Header, Item } from "@/types/landing";
-
-import DropDown from "./dropdown";
 import { usePathname } from "next/navigation";
 
-export default ({ header }: { header: Header }) => {
+import DropDown from "./dropdown";
+
+interface HeaderProps {
+  header: Header;
+}
+
+export default function HeaderComponent({ header }: HeaderProps) {
   const pathname = usePathname();
 
   return (
@@ -28,9 +31,8 @@ export default ({ header }: { header: Header }) => {
 
         <div className="flex-1">
           <ul className="md:flex float-right flex text-lg text-slate-700 mr-4 items-center">
-            {header?.nav?.items?.map((item: Item, idx: number) => {
-              return (
-                <li className="mx-4 hidden md:block" key={idx}>
+            {header?.nav?.items?.map((item, idx) => (
+                <li className="mx-4 hidden md:block" key={item.url ?? idx}>
                   <a
                     href={item.url}
                     target={item.target}
@@ -43,8 +45,7 @@ export default ({ header }: { header: Header }) => {
                     {item.title}
                   </a>
                 </li>
-              );
-            })}
+              ))}
           </ul>
         </div>
         {/* <a

@@ -1,20 +1,21 @@
-import { LazyLoadImage } from "react-lazy-load-image-component";
 import Link from "next/link";
-import { Project } from "@/types/project";
-import StarIcon from "../../assets/imgs/star.svg";
-import Stars from "../stars";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 import moment from "moment";
+import type { Project } from "@/types/project";
+import Stars from "../stars";
 
-export default ({ project }: { project: Project }) => {
+interface ProjectItemProps {
+  project: Project;
+}
+
+export default function ProjectItem({ project }: ProjectItemProps) {
+  const href =
+    project.target === "_blank"
+      ? project.url ?? "#"
+      : `/server/${project.name ?? ""}`;
+
   return (
-    <Link
-      href={
-        project.target === "_blank"
-          ? project.url || ""
-          : `/server/${project.name}`
-      }
-      target={project.target || "_self"}
-    >
+    <Link href={href} target={project.target ?? "_self"}>
       <div className="mb-6 gap-6 overflow-hidden rounded-2xl border border-solid border-[#7e7e7e] bg-white p-8 text-left">
         <div className="mb-4 flex flex-row">
           {project.avatar_url && (
@@ -35,7 +36,7 @@ export default ({ project }: { project: Project }) => {
         </p>
 
         <div className="flex items-center">
-          {true && <Stars />}
+          <Stars />
           <div className="flex-1"></div>
 
           <p className="text-slate-500 text-sm">

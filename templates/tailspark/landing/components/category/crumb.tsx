@@ -1,9 +1,12 @@
-import { Category } from "@/types/category";
 import { FiHome } from "react-icons/fi";
 import { MdKeyboardArrowRight } from "react-icons/md";
-import { Project } from "@/types/project";
+import type { Category } from "@/types/category";
 
-export default ({ category }: { category: Category }) => {
+interface CategoryCrumbProps {
+  category: Category;
+}
+
+export default function CategoryCrumb({ category }: CategoryCrumbProps) {
   return (
     <nav className="flex" aria-label="Breadcrumb">
       <ol role="list" className="flex items-center space-x-2">
@@ -22,7 +25,7 @@ export default ({ category }: { category: Category }) => {
             <a
               className="ml-2 text-md font-medium text-gray-500 hover:text-primary"
               aria-current="page"
-              href={"/categories"}
+              href="/categories"
             >
               Categories
             </a>
@@ -35,7 +38,7 @@ export default ({ category }: { category: Category }) => {
             <a
               className="ml-2 text-md font-medium text-primary"
               aria-current="page"
-              //   href={`/category/${category.name}`}
+              href={`/category/${category.name}`}
             >
               {category.title}
             </a>
@@ -44,4 +47,4 @@ export default ({ category }: { category: Category }) => {
       </ol>
     </nav>
   );
-};
+}

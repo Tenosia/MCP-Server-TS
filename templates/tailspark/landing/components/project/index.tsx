@@ -1,24 +1,26 @@
 import { BiCategory } from "react-icons/bi";
 import { BsTags } from "react-icons/bs";
-import { Category } from "@/types/category";
-import Crumb from "./crumb";
+import moment from "moment";
 import Markdown from "@/components/markdown";
+import type { Category } from "@/types/category";
+import type { Project } from "@/types/project";
+import Crumb from "./crumb";
 import Preview from "./preview";
-import { Project } from "@/types/project";
 import Projects from "../projects";
 import Stars from "../stars";
-import moment from "moment";
 
-export default ({
-  category,
-  project,
-  more_projects,
-}: {
+interface ProjectDetailProps {
   category?: Category;
   project: Project;
   more_projects?: Project[];
-}) => {
-  const tagsArr = project.tags ? project.tags.split(",") : [];
+}
+
+export default function ProjectDetail({
+  category,
+  project,
+  more_projects,
+}: ProjectDetailProps) {
+  const tagsArr = project.tags ? project.tags.split(",").filter(Boolean) : [];
 
   return (
     <div className="mx-auto max-w-7xl px-5 py-4 md:px-10 md:py-4 lg:py-4">
@@ -61,18 +63,17 @@ export default ({
                 <BsTags className="inline-block mr-2" />
                 Tags
               </p>
-              {tagsArr &&
-                tagsArr.map((tag) => (
-                  <p key={tag}>
-                    <input
-                      type="checkbox"
-                      className="mr-2"
-                      readOnly
-                      checked={tagsArr && tagsArr.includes(tag)}
-                    />
-                    {tag}
-                  </p>
-                ))}
+              {tagsArr.map((tag, i) => (
+                <p key={`${tag}-${i}`}>
+                  <input
+                    type="checkbox"
+                    className="mr-2"
+                    readOnly
+                    checked
+                  />
+                  {tag}
+                </p>
+              ))}
             </div>
 
             <div className="flex flex-col gap-4 font-semibold sm:flex-row">
