@@ -67,29 +67,29 @@ export async function getProjects(
 
 export async function getProjectsCount(): Promise<number> {
   const supabase = getSupabaseClient();
-  const { data, error } = await supabase
+  const { count, error } = await supabase
     .from("projects")
-    .select("count")
+    .select("*", { count: "exact", head: true })
     .eq("status", ProjectStatus.Created);
 
   if (error) return 0;
 
-  return data?.[0]?.count || 0;
+  return count ?? 0;
 }
 
 export async function getProjectsCountByCategory(
   category: string
 ): Promise<number> {
   const supabase = getSupabaseClient();
-  const { data, error } = await supabase
+  const { count, error } = await supabase
     .from("projects")
-    .select("count")
+    .select("*", { count: "exact", head: true })
     .eq("category", category)
     .eq("status", ProjectStatus.Created);
 
   if (error) return 0;
 
-  return data?.[0]?.count || 0;
+  return count ?? 0;
 }
 
 export async function getProjectsByCategory(

@@ -6,7 +6,7 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     title: "Terms of Service",
     alternates: {
-      canonical: `${process.env.NEXT_PUBLIC_WEB_BASE_URL}/terms-of-service`,
+      canonical: `${process.env.NEXT_PUBLIC_WEB_URL}/terms-of-service`,
     },
   };
 }
