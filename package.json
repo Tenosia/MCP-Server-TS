@@ -5,10 +5,11 @@
   "scripts": {
     "dev": "next dev",
     "watch": "next dev --turbopack",
-    "typecheck": "tsc --noEmit",
     "build": "next build",
     "start": "next start",
+    "typecheck": "tsc --noEmit",
     "lint": "next lint",
+    "lint:fix": "next lint --fix",
     "pages:build": "npx @cloudflare/next-on-pages",
     "preview": "pnpm pages:build && wrangler pages dev",
     "deploy": "pnpm pages:build && wrangler pages deploy"
