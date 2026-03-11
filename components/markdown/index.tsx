@@ -1,7 +1,7 @@
 "use client";
 
 import "highlight.js/styles/atom-one-dark.min.css"; // Import a highlight.js style
-import "../markdown/markdown.css";
+import "./markdown.css";
 
 import MarkdownIt from "markdown-it";
 import React from "react";
