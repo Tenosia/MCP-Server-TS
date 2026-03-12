@@ -10,6 +10,7 @@
     "typecheck": "tsc --noEmit",
     "lint": "next lint",
     "lint:fix": "next lint --fix",
+    "db:schema": "cat data/install.sql",
     "pages:build": "npx @cloudflare/next-on-pages",
     "preview": "pnpm pages:build && wrangler pages dev",
     "deploy": "pnpm pages:build && wrangler pages deploy"
