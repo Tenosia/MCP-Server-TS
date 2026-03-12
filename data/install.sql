@@ -1,8 +1,11 @@
+-- MCP Directory / mcp.so — Supabase schema
+-- Run this in the Supabase SQL editor: Dashboard → SQL Editor → New query
+
 CREATE TABLE users (
     id SERIAL PRIMARY KEY,
     uuid VARCHAR(255) UNIQUE NOT NULL,
     email VARCHAR(255) NOT NULL,
-    created_at timestamptz,
+    created_at timestamptz DEFAULT NOW(),
     nickname VARCHAR(255),
     avatar_url VARCHAR(255),
     locale VARCHAR(50),
@@ -20,8 +23,8 @@ CREATE TABLE projects (
     title VARCHAR(255) NOT NULL,
     description TEXT,
     avatar_url VARCHAR(255),
-    created_at timestamptz,
-    updated_at timestamptz,
+    created_at timestamptz DEFAULT NOW(),
+    updated_at timestamptz DEFAULT NOW(),
     status VARCHAR(50),
     author_name VARCHAR(255),
     author_avatar_url VARCHAR(255),
@@ -41,7 +44,7 @@ CREATE TABLE categories (
     name VARCHAR(255) UNIQUE NOT NULL,
     title VARCHAR(255) NOT NULL,
     status VARCHAR(50),
-    created_at timestamptz
+    created_at timestamptz DEFAULT NOW()
 );
 
 CREATE INDEX idx_projects_category_query ON projects(category, status, sort DESC, created_at DESC);

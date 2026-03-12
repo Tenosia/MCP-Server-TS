@@ -1,5 +1,6 @@
-@baseUrl = http://127.0.0.1:8051/api
+@baseUrl = http://127.0.0.1:3000/api
 # @baseUrl = https://mcp.so/api
+# Requires: pnpm dev (Next.js runs on 3000)
 
 ###
 POST {{baseUrl}}/submit-project
@@ -43,12 +44,4 @@ Content-Type: application/json
   "limit": 200
 }
 
-###
-POST {{baseUrl}}/update-sitemaps
-Content-Type: application/json
-
-{
-  "batch_no": 1,
-  "limit": 500,
-  "page_step": 5
-}
+# update-sitemaps — not implemented (see .gitignore)
