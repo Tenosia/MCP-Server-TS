@@ -1,7 +1,10 @@
 {
-  "name": "navfast",
+  "name": "mcpso",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": ">=20"
+  },
   "scripts": {
     "dev": "next dev",
     "watch": "next dev --turbopack",
@@ -10,6 +13,7 @@
     "typecheck": "tsc --noEmit",
     "lint": "next lint",
     "lint:fix": "next lint --fix",
+    "clean": "rm -rf .next",
     "db:schema": "cat data/install.sql",
     "pages:build": "npx @cloudflare/next-on-pages",
     "preview": "pnpm pages:build && wrangler pages dev",
