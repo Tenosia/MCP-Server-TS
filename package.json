@@ -13,7 +13,7 @@
     "typecheck": "tsc --noEmit",
     "lint": "next lint",
     "lint:fix": "next lint --fix",
-    "clean": "rm -rf .next",
+    "clean": "node -e \"require('fs').rmSync('.next',{recursive:true,force:true})\"",
     "db:schema": "cat data/install.sql",
     "pages:build": "npx @cloudflare/next-on-pages",
     "preview": "pnpm pages:build && wrangler pages dev",
